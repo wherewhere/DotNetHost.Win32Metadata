@@ -1,0 +1,6 @@
+--traverse
+<IncludeRoot>/nethost.h
+<IncludeRoot>/coreclr_delegates.h
+<IncludeRoot>/hostfxr.h
+--namespace
+System.Runtime.Hosting.Native
