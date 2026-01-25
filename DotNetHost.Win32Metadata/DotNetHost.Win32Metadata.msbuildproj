@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.Windows.WinmdGenerator/0.69.7-preview">
+﻿<Project Sdk="Microsoft.Windows.WinmdGenerator">
   <PropertyGroup>
     <GenerateAssemblyVersionInfo>false</GenerateAssemblyVersionInfo>
     <NoWarn>$(NoWarn);NU5100;NU5104</NoWarn>

@@ -1,11 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <LangVersion>latest</LangVersion>
-    <TargetFramework>net4.8.1</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net4.8.1</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -31,5 +29,4 @@
       <Visible>false</Visible>
     </None>
   </ItemGroup>
-
 </Project>

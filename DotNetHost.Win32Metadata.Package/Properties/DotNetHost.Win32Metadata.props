@@ -1,0 +1,6 @@
+<Project>
+  <ItemGroup>
+    <AppLocalAllowedLibraries Include="nethost" />
+    <ProjectionMetadataWinmd Include="$(MSBuildThisFileDirectory)..\DotNetHost.winmd" />
+  </ItemGroup>
+</Project>
