@@ -1,5 +1,6 @@
 <Solution>
-  <Project Path="DotNetHost.Win32Metadata.Test/DotNetHost.Win32Metadata.Test.csproj" />
+  <Project Path="DotNetHost.Win32Metadata.Document/DotNetHost.Win32Metadata.Document.csproj" Id="f9744e9b-1dae-47a7-a5db-3a4fedde8ab9" />
   <Project Path="DotNetHost.Win32Metadata.Package/DotNetHost.Win32Metadata.Package.msbuildproj" Type="13b669be-bb05-4ddf-9536-439f39a36129" />
+  <Project Path="DotNetHost.Win32Metadata.Test/DotNetHost.Win32Metadata.Test.csproj" />
   <Project Path="DotNetHost.Win32Metadata/DotNetHost.Win32Metadata.msbuildproj" Type="13b669be-bb05-4ddf-9536-439f39a36129" />
 </Solution>

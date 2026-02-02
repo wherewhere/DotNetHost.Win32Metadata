@@ -18,8 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectionMetadataWinmd Include="..\DotNetHost.Win32Metadata\bin\*.winmd" />
     <AppLocalAllowedLibraries Include="nethost" />
+    <ProjectionDocs Include="..\DotNetHost.Win32Metadata\bin\*.msgpack" />
+    <ProjectionMetadataWinmd Include="..\DotNetHost.Win32Metadata\bin\*.winmd" />
     <ReferenceCopyLocalPaths Include="$(AppHostPath)\nethost.dll" />
   </ItemGroup>
 

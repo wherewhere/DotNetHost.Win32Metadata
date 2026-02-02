@@ -22,14 +22,14 @@ unsafe static bool LoadHostFXR()
 {
     // Pre-allocate a large buffer for the path to hostfxr
     const int PATH_MAX = 260;
-    Span<ushort> buffer = stackalloc ushort[PATH_MAX];
+    char* buffer = stackalloc char[PATH_MAX];
     nuint buffer_size = PATH_MAX;
-    int rc = DotNetHost.get_hostfxr_path(ref buffer[0], ref buffer_size, Unsafe.NullRef<get_hostfxr_parameters>());
+    int rc = DotNetHost.get_hostfxr_path(buffer, &buffer_size);
     if (rc != 0)
     { return false; }
 
     // Load hostfxr and get desired exports
-    using FreeLibrarySafeHandle lib = new(PInvoke.LoadLibrary(new PCWSTR((char*)Unsafe.AsPointer(ref buffer[0]))), true);
+    using FreeLibrarySafeHandle lib = new(PInvoke.LoadLibrary(new PCWSTR(buffer)), true);
     init_fptr = PInvoke.GetProcAddress(lib, "hostfxr_initialize_for_runtime_config");
     get_delegate_fptr = PInvoke.GetProcAddress(lib, "hostfxr_get_runtime_delegate");
     close_fptr = PInvoke.GetProcAddress(lib, "hostfxr_close");
@@ -55,10 +55,10 @@ The `hostfxr_initialize_for_runtime_config` and `hostfxr_get_runtime_delegate` f
 unsafe static load_assembly_and_get_function_pointer_fn? GetDotNetLoadAssembly(ReadOnlySpan<char> config_path)
 {
     // Load .NET Core App
-    void* load_assembly_and_get_function_pointer = null;
-    void* cxt = null;
-    int rc = init_fptr((ushort*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(config_path)), null, &cxt);
-    if (rc != 0 || cxt == null)
+    FARPROC load_assembly_and_get_function_pointer = default;
+    hostfxr_handle cxt = default;
+    rc = init_fptr((char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(config_path)), null, &cxt);
+    if (rc != 0 || cxt.IsNull)
     {
         Console.WriteLine($"Init failed: ${rc:X}");
         return null;
@@ -69,11 +69,11 @@ unsafe static load_assembly_and_get_function_pointer_fn? GetDotNetLoadAssembly(R
         cxt,
         hostfxr_delegate_type.hdt_load_assembly_and_get_function_pointer,
         &load_assembly_and_get_function_pointer);
-    if (rc != 0 || load_assembly_and_get_function_pointer == null)
+    if (rc != 0 || load_assembly_and_get_function_pointer.IsNull)
     { Console.WriteLine($"Get delegate failed: ${rc:X}"); }
 
     close_fptr(cxt);
-    return Marshal.GetDelegateForFunctionPointer<load_assembly_and_get_function_pointer_fn>((nint)load_assembly_and_get_function_pointer);
+    return load_assembly_and_get_function_pointer.CreateDelegate<load_assembly_and_get_function_pointer_fn>();
 }
 ```
 
@@ -82,11 +82,11 @@ The runtime delegate is called to load the managed assembly and get a function p
 
 ```cs
 // Function pointer to managed delegate
-void* hello = null;
+FARPROC hello = default;
 int rc = load_assembly_and_get_function_pointer(
-    (ushort*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(dotnetlib_path)),
-    (ushort*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(dotnet_type)),
-    (ushort*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(dotnet_type_method)),
+    (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(dotnetlib_path)),
+    (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(dotnet_type)),
+    (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(dotnet_type_method)),
     null /*delegate_type_name*/,
     null,
     &hello);

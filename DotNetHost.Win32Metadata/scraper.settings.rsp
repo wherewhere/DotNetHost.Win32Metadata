@@ -1,0 +1,3 @@
+--remap
+wchar_t=char
+hostfxr_handle=hostfxr_handle

@@ -10,7 +10,7 @@
     <PackageTags>Win32;Metadata;.NET;Host</PackageTags>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/wherewhere/DotNetHost.Win32Metadata</RepositoryUrl>
-    <VersionPrefix>10.0.2.0</VersionPrefix>
+    <VersionPrefix>10.0.2.1</VersionPrefix>
     <Description>This packages provides the Win32 API surface of the .NET Host library as a winmd (Windows metadata) file. It is intended to be used as the basis for generating language-specific projections. It is not loadable as a CLR assembly.</Description>
   </PropertyGroup>
 

@@ -1,6 +1,7 @@
 <Project>
   <ItemGroup>
     <AppLocalAllowedLibraries Include="nethost" />
+    <ProjectionDocs Include="$(MSBuildThisFileDirectory)..\apidocs.msgpack" />
     <ProjectionMetadataWinmd Include="$(MSBuildThisFileDirectory)..\DotNetHost.winmd" />
   </ItemGroup>
 </Project>

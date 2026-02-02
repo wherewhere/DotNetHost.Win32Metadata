@@ -1,0 +1,9 @@
+[
+  {
+    "Namespace": "System.Runtime.Hosting.Native",
+    "Name": "hostfxr_handle",
+    "ValueType": "void*",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
+  }
+]
