@@ -31,6 +31,7 @@ body:
       label: NuGet package version
       description: Specify the version of DotNetHost.Win32Metadata you're using.
       options:
+        - 10.0.2.1
         - 10.0.2.0
   - type: dropdown
     attributes:
