@@ -1,9 +1,8 @@
 ﻿<Project Sdk="Microsoft.Windows.WinmdGenerator">
   <PropertyGroup>
     <GenerateAssemblyVersionInfo>false</GenerateAssemblyVersionInfo>
-    <NoWarn>$(NoWarn);NU5100;NU5104</NoWarn>
+    <NoWarn>$(NoWarn);MSB4240;NU5100;NU5104</NoWarn>
     <OutputWinmd>bin\DotNetHost.winmd</OutputWinmd>
-    <TargetFramework>netstandard2.1</TargetFramework>
     <WinmdVersion>$(BundledNETCoreAppPackageVersion)</WinmdVersion>
   </PropertyGroup>
 

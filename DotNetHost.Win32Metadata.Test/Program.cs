@@ -6,9 +6,9 @@ using Windows.Win32.Foundation;
 using DotNetHost = System.Runtime.Hosting.Native.PInvoke;
 using PInvoke = Windows.Win32.PInvoke;
 
-Version a = Environment.Version;
-Console.WriteLine($"Host Process .NET Version: {a}");
-if (a.Major > 4) { return 0; }
+Version version = Environment.Version;
+Console.WriteLine($"Host Process .NET Version: {version}");
+if (version.Major > 4) { return 0; }
 
 unsafe
 {
@@ -64,10 +64,10 @@ unsafe
     { Marshal.ThrowExceptionForHR(rc); }
 
     MainDelegate entry_point = main.CreateDelegate<MainDelegate>();
-    rc = entry_point(null);
+    rc = entry_point();
 
     _ = Console.ReadKey();
     return rc;
 }
 
-public delegate int MainDelegate(string[] args);
+public delegate int MainDelegate(string[]? args = null);
